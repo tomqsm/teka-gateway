@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @author Tomasz
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = MockServletContext.class)
+@SpringApplicationConfiguration(classes = MockServletContext.class) //sets up an empty mvc context
 @WebAppConfiguration
 public class RestOneControllerTest {
 
