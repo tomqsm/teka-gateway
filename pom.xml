@@ -5,6 +5,8 @@
     <artifactId>teka-gateway</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+    <name>REST Gateway</name>
+    <description>Draft gateway for REST spring boot based web services.</description>
     <modules>
         <module>rest-one</module>
         <module>rest-two</module>

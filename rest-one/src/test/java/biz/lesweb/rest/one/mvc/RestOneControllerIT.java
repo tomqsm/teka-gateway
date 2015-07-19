@@ -17,8 +17,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * https://spring.io/guides/gs/spring-boot/
- * full-stack integration test
+ * https://spring.io/guides/gs/spring-boot/ full-stack integration test
+ *
  * @author Tomasz
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -30,19 +30,19 @@ public class RestOneControllerIT {
     @Value("${local.server.port}")
     private int port;
 
-	private URL base;
-	private RestTemplate template;
+    private URL base;
+    private RestTemplate template;
 
-	@Before
-	public void setUp() throws Exception {
-		this.base = new URL("http://localhost:" + port + "/");
-		template = new TestRestTemplate();
-	}
+    @Before
+    public void setUp() throws Exception {
+        this.base = new URL("http://localhost:" + port + "/");
+        template = new TestRestTemplate();
+    }
 
-	@Test
-	public void getHello() throws Exception {
-		ResponseEntity<String> response = template.getForEntity(base.toString(), String.class);
-		assertThat(response.getBody(), equalTo("Greetings from Spring Boot!"));
-	}
+    @Test
+    public void getHello() throws Exception {
+        ResponseEntity<String> response = template.getForEntity(base.toString(), String.class);
+        assertThat(response.getBody(), equalTo("Greetings from Spring Boot!"));
+    }
 
 }
