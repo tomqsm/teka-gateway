@@ -13,5 +13,4 @@ public class RestOneApp {
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(RestOneApp.class, args);
     }
-    
 }
