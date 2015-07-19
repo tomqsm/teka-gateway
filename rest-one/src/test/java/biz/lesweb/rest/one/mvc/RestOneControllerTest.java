@@ -1,50 +1,43 @@
 package biz.lesweb.rest.one.mvc;
 
+import static org.hamcrest.core.StringContains.containsString;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.mock.web.MockServletContext;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 
 /**
  *
  * @author Tomasz
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = MockServletContext.class)
+@WebAppConfiguration
 public class RestOneControllerTest {
-    
-    public RestOneControllerTest() {
-    }
-    
-        private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @InjectMocks
-    RestOneController welcomeRestController;
+    RestOneController restOneController;
 
-    MockMvc mockMvc;
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    private MockMvc mockMvc;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        this.mockMvc = MockMvcBuilders.standaloneSetup(welcomeRestController).setMessageConverters(new MappingJackson2HttpMessageConverter()).build();
+        this.mockMvc = MockMvcBuilders.standaloneSetup(restOneController).setMessageConverters(new MappingJackson2HttpMessageConverter()).build();
     }
 
     @After
@@ -53,10 +46,11 @@ public class RestOneControllerTest {
 
     @Test
     public void controllerFound() throws Exception {
-        final MockHttpServletRequestBuilder get = get("/");
+        final MockHttpServletRequestBuilder get = get("/")
+                .accept(MediaType.APPLICATION_JSON);
         this.mockMvc.perform(get)
-                //                .andDo(print())
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("Greetings from Spring Boot!")));
     }
-    
+
 }
