@@ -9,18 +9,21 @@
     <artifactId>camel-integration</artifactId>
     <packaging>jar</packaging>
     <dependencies>
+        
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
-<!--        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-core</artifactId>
-        </dependency>-->
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-spring-boot</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jetty9</artifactId>
+            <version>2.15.2</version>
+        </dependency>
+
         <!--TESTING-->
         <dependency>
             <groupId>junit</groupId>

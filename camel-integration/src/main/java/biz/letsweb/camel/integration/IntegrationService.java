@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  *
  * @author Tomasz
  */
-//@Component
+@Component
 public class IntegrationService extends RouteBuilder {
 
     @Override
@@ -29,6 +29,10 @@ public class IntegrationService extends RouteBuilder {
                     }
                 }).convertBodyTo(String.class)
                 .to("file:data/outbox");
+        from("jetty://http://localhost:8083?matchOnUriPrefix=true")
+                .loadBalance()
+                .roundRobin()
+                .to("http://localhost:8080?throwExceptionOnFailure=false&bridgeEndpoint=true");
     }
 
 }
