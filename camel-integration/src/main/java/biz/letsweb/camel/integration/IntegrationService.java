@@ -16,23 +16,27 @@ public class IntegrationService extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("file:data/inbox?noop=true")
-                .choice().when(header("CamelFileName").endsWith(".xml"))
-                .process(new Processor() {
-                    @Override
-                    public void process(Exchange exchange) throws Exception {
-                        Message message = exchange.getIn();
-                        String body = message.getBody(String.class);
-                        body = body + " enriched " + message.getHeader("CamelFileName", String.class);
-                        message.setBody(body, String.class);
-                        exchange.setIn(message);
-                    }
-                }).convertBodyTo(String.class)
-                .to("file:data/outbox");
-        from("jetty://http://localhost:8083?matchOnUriPrefix=true")
+//        from("file:data/inbox?noop=true")
+//                .choice().when(header("CamelFileName").endsWith(".xml"))
+//                .process(new Processor() {
+//                    @Override
+//                    public void process(Exchange exchange) throws Exception {
+//                        Message message = exchange.getIn();
+//                        String body = message.getBody(String.class);
+//                        body = body + " enriched " + message.getHeader("CamelFileName", String.class);
+//                        message.setBody(body, String.class);
+//                        exchange.setIn(message);
+//                    }
+//                }).convertBodyTo(String.class)
+//                .to("file:data/outbox");
+        from("jetty://http://localhost:8083?matchOnUriPrefix=true&throwExceptionOnFailure=false")
                 .loadBalance()
+//                .random()
                 .roundRobin()
-                .to("http://localhost:8080?throwExceptionOnFailure=false&bridgeEndpoint=true");
+                .to("http://localhost:8080?throwExceptionOnFailure=true&bridgeEndpoint=true", 
+                        "http://localhost:8090?throwExceptionOnFailure=true&bridgeEndpoint=true",
+                        "http://localhost:8070?throwExceptionOnFailure=true&bridgeEndpoint=true"
+                );
     }
 
 }
