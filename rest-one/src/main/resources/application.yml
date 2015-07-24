@@ -1,0 +1,11 @@
+server:
+    port: 8070
+logging:
+    level:
+        org.springframework.web:WARN
+---
+spring:
+    profiles: development
+    logging:
+        level:
+            org.springframework.web:DEBUG
