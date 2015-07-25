@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.SocketUtils;
 import ch.qos.logback.access.tomcat.LogbackValve;
+import java.util.Arrays;
 
 /**
  * Refer to:
@@ -32,9 +33,14 @@ public class ContainerCustomisation {
     public EmbeddedServletContainerFactory servletContainer() {
         TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
         tomcat.addAdditionalTomcatConnectors(createSslConnector());
-        LogbackValve  logbackValve = new LogbackValve();
+        LogbackValve logbackValve = new LogbackValve();
         logbackValve.setFilename("src/main/resources/logback-access.xml");
         tomcat.addContextValves(logbackValve);
+        
+        tomcat.setTomcatContextCustomizers(Arrays.asList(context -> {
+            context.setSessionTimeout(30);
+        }));
+
         return tomcat;
     }
 
