@@ -1,9 +1,6 @@
 package biz.letsweb.camel.integration;
 
-import org.apache.camel.CamelContext;
-import org.apache.camel.Exchange;
-import org.apache.camel.Message;
-import org.apache.camel.Processor;
+import java.net.ConnectException;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
@@ -31,11 +28,13 @@ public class IntegrationService extends RouteBuilder {
 //                .to("file:data/outbox");
         from("jetty://http://localhost:8083?matchOnUriPrefix=true&throwExceptionOnFailure=false")
                 .loadBalance()
-//                .random()
-                .roundRobin()
-                .to("http://localhost:8080?throwExceptionOnFailure=true&bridgeEndpoint=true", 
-                        "http://localhost:8090?throwExceptionOnFailure=true&bridgeEndpoint=true",
-                        "http://localhost:8070?throwExceptionOnFailure=true&bridgeEndpoint=true"
+                //                .random()
+                .failover(2, true, true, ConnectException.class)
+                //                .roundRobin()
+                .to(
+                        //                        "http://localhost:8080?throwExceptionOnFailure=true&bridgeEndpoint=true",
+                        "http://localhost:8070?throwExceptionOnFailure=true&bridgeEndpoint=true",
+                        "http://localhost:8071?throwExceptionOnFailure=true&bridgeEndpoint=true"
                 );
     }
 

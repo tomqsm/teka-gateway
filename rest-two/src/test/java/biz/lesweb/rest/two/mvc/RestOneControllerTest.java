@@ -1,4 +1,4 @@
-package biz.lesweb.rest.one.mvc;
+package biz.lesweb.rest.two.mvc;
 
 import static org.hamcrest.core.StringContains.containsString;
 import org.junit.After;
@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 public class RestOneControllerTest {
 
     @InjectMocks
-    RestOneController restOneController;
+    RestTwoController restOneController;
 
     private MockMvc mockMvc;
 
@@ -50,7 +50,7 @@ public class RestOneControllerTest {
                 .accept(MediaType.APPLICATION_JSON);
         this.mockMvc.perform(get)
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Greetings from Rest 1!")));
+                .andExpect(content().string(containsString("Greetings from Rest 2!")));
     }
 
 }
