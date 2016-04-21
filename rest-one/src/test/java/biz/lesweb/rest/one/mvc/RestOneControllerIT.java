@@ -1,7 +1,7 @@
 package biz.lesweb.rest.one.mvc;
 
 import biz.lesweb.rest.one.RestOneApp;
-import biz.lesweb.rest.one.mvc.service.api.ServiceOne;
+import biz.lesweb.rest.one.rest.service.api.ServiceRestOne;
 import java.net.URL;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;

@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
  * @author tomasz
  */
 @Component
-public interface ServiceOne {
+public interface ServiceMvcOne {
     void doOne();
 }

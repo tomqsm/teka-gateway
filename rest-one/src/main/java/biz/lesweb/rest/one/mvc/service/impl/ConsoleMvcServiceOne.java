@@ -1,6 +1,6 @@
 package biz.lesweb.rest.one.mvc.service.impl;
 
-import biz.lesweb.rest.one.mvc.service.api.ServiceOne;
+import biz.lesweb.rest.one.mvc.service.api.ServiceMvcOne;
 import org.springframework.stereotype.Component;
 
 /**
@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
  * @author tomasz
  */
 @Component
-public class ConsoleServiceOne implements ServiceOne {
+public class ConsoleMvcServiceOne implements ServiceMvcOne {
 
     @Override
     public void doOne() {
-        System.out.println("doing console service one");
+        System.out.println("doing console service one MVC");
     }
 
 }

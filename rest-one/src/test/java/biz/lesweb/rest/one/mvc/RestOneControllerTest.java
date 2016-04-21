@@ -1,6 +1,7 @@
 package biz.lesweb.rest.one.mvc;
 
-import biz.lesweb.rest.one.mvc.service.api.ServiceOne;
+import biz.lesweb.rest.one.rest.RestOneController;
+import biz.lesweb.rest.one.rest.service.api.ServiceRestOne;
 import static org.hamcrest.core.StringContains.containsString;
 import org.junit.After;
 import org.junit.Before;
@@ -66,14 +67,14 @@ public class RestOneControllerTest {
 
     @Test
     public void controllerWithMockedContextNeedsManualInjectionOfAutowiredField() throws Exception {
-        final ServiceOne serviceOne = Mockito.mock(ServiceOne.class);
+        final ServiceRestOne serviceRestOne = Mockito.mock(ServiceRestOne.class);
         
         //stubbing
         Mockito.doAnswer((Answer<Void>) (InvocationOnMock invocation) -> {
             System.out.println("Hello world");
             return null;
-        }).when(serviceOne).doOne();
-        ReflectionTestUtils.setField(restOneController, "serviceOne", serviceOne);
+        }).when(serviceRestOne).doOne();
+        ReflectionTestUtils.setField(restOneController, "serviceRestOne", serviceRestOne);
         
         final MockHttpServletRequestBuilder get = get("/")
                 .accept(MediaType.APPLICATION_JSON);
