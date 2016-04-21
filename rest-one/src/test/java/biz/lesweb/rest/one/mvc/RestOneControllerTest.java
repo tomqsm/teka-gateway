@@ -57,14 +57,6 @@ public class RestOneControllerTest {
     public void tearDown() {
     }
 
-    @Test
-    public void controllerFound() throws Exception {
-        final MockHttpServletRequestBuilder get = get("/")
-                .accept(MediaType.APPLICATION_JSON);
-        this.mockMvc.perform(get)
-                .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Greetings from Rest 1!")));
-    }
 
     @Test
     public void controllerCleanPathShowcase() throws Exception {

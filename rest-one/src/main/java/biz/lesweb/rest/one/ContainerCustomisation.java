@@ -13,6 +13,8 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.SocketUtils;
 import ch.qos.logback.access.tomcat.LogbackValve;
 import java.util.Arrays;
+import org.springframework.boot.context.embedded.ErrorPage;
+import org.springframework.http.HttpStatus;
 
 /**
  * Refer to:
@@ -31,17 +33,16 @@ public class ContainerCustomisation {
 
     @Bean
     public EmbeddedServletContainerFactory servletContainer() {
-        TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
-        tomcat.addAdditionalTomcatConnectors(createSslConnector());
+        TomcatEmbeddedServletContainerFactory tomcatFactory = new TomcatEmbeddedServletContainerFactory();
+        tomcatFactory.addAdditionalTomcatConnectors(createSslConnector());
         LogbackValve logbackValve = new LogbackValve();
         logbackValve.setFilename("src/main/resources/logback-access.xml");
-        tomcat.addContextValves(logbackValve);
-        
-        tomcat.setTomcatContextCustomizers(Arrays.asList(context -> {
+        tomcatFactory.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/notfound.html"));
+        tomcatFactory.setTomcatContextCustomizers(Arrays.asList(context -> {
             context.setSessionTimeout(30);
         }));
 
-        return tomcat;
+        return tomcatFactory;
     }
 
     private Connector createSslConnector() {
@@ -56,41 +57,17 @@ public class ContainerCustomisation {
     private Connector setPkcKey() throws IOException {
         Connector connector = new Connector("org.apache.coyote.http11.Http11Protocol");
         Http11Protocol protocol = (Http11Protocol) connector.getProtocolHandler();
-        File keystore = new ClassPathResource("myKeystore.p12").getFile();
+        File keystore = new ClassPathResource("my_pkcs12.pfx").getFile();
         connector.setScheme("https");
         connector.setSecure(true);
         connector.setPort(port());
         protocol.setSSLEnabled(true);
         protocol.setSslProtocol("TLS");
         protocol.setKeystoreFile(keystore.getAbsolutePath());
-        protocol.setKeystorePass("keyPwd");
+        protocol.setKeystorePass("Drzewko74");
         protocol.setKeystoreType("PKCS12");
-        protocol.setKeyPass("keyPwd");
-        protocol.setKeyAlias("keyalias");
         protocol.setClientAuth("false");
         return connector;
     }
 
-    /**
-     * TLS1.2
-     *
-     * @param connector
-     * @throws IOException
-     */
-    private Connector setRsaKey() throws IOException {
-        Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
-        Http11NioProtocol protocol = (Http11NioProtocol) connector.getProtocolHandler();
-        File keystore = new ClassPathResource("keystore").getFile();
-        File truststore = keystore;
-        connector.setScheme("https");
-        connector.setSecure(true);
-        connector.setPort(port());
-        protocol.setSSLEnabled(true);
-        protocol.setKeystoreFile(keystore.getAbsolutePath());
-        protocol.setKeystorePass("changeit");
-        protocol.setTruststoreFile(truststore.getAbsolutePath());
-        protocol.setTruststorePass("changeit");
-        protocol.setKeyAlias("apitester");
-        return connector;
-    }
 }
