@@ -5,7 +5,7 @@
     <artifactId>teka-gateway</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>REST Gateway</name>
+    <name>teka-gateway</name>
     <description>Draft gateway for REST spring boot based web services.</description>
     <modules>
         <module>rest-one</module>
@@ -23,7 +23,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>1.2.5.RELEASE</version>
+                <version>1.3.2.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
