@@ -6,7 +6,7 @@
         <artifactId>teka-gateway</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <groupId>biz.lesweb</groupId>
+    <groupId>biz.letsweb</groupId>
     <artifactId>rest-one</artifactId>
     <packaging>jar</packaging>
     <dependencies>
