@@ -1,6 +1,4 @@
-package biz.lesweb.rest.one.mvc;
-
-import biz.lesweb.rest.one.rest.RestOneController;
+package biz.lesweb.rest.one.rest;
 import biz.lesweb.rest.one.rest.service.api.ServiceRestOne;
 import static org.hamcrest.core.StringContains.containsString;
 import org.junit.After;
@@ -10,10 +8,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.fest.assertions.Assertions;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -68,8 +63,8 @@ public class RestOneControllerTest {
     @Test
     public void controllerWithMockedContextNeedsManualInjectionOfAutowiredField() throws Exception {
         final ServiceRestOne serviceRestOne = Mockito.mock(ServiceRestOne.class);
-        
-        //stubbing
+
+        //stubbing of a service void method
         Mockito.doAnswer((Answer<Void>) (InvocationOnMock invocation) -> {
             System.out.println("Hello world");
             return null;
