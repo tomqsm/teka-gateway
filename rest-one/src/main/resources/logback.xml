@@ -6,13 +6,13 @@
         </encoder>
     </appender>
 
-    <!--<timestamp key="bySecond" datePattern="yyyy-MM-dd-HH-mm-ss"/>-->
-    <!--    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>cdbnext-log-${bySecond}.txt</file>
+    <timestamp key="bySecond" datePattern="yyyyMMdd_HHmmss"/>
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>log-${bySecond}.txt</file>
         <encoder>
-            <pattern>cdbnext %-5level %d{HH:mm:ss.SSS} [%thread]  %logger{36}.%M,%L - %msg%n</pattern>
+            <pattern>%-5level %d{HH:mm:ss.SSS} [%thread]  %class{0}.%M,%L - %msg%n</pattern>
         </encoder>
-    </appender>-->
+    </appender>
 
     <logger name="org.apache.http" level="INFO" />
     <logger name="org.springframework" level="WARN" />
@@ -23,7 +23,7 @@
 
     <root level="INFO">
         <appender-ref ref="STDOUT" />
-        <!--<appender-ref ref="FILE" />-->
+        <appender-ref ref="FILE" />
     </root>
 
 </configuration>
