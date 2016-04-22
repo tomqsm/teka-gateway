@@ -3,6 +3,9 @@ package biz.lesweb.rest.one.rest;
 import biz.lesweb.rest.one.rest.service.api.ServiceRestOne;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
 import static org.hamcrest.core.StringContains.containsString;
 import org.junit.After;
 import org.junit.Before;
@@ -11,11 +14,17 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.fest.assertions.Assertions;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.springframework.boot.test.EnvironmentTestUtils;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.TestRestTemplate;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -88,7 +97,7 @@ public class RestOneControllerTest {
         final ServiceRestOne serviceRestOne = Mockito.mock(ServiceRestOne.class);
         
         ReflectionTestUtils.setField(restOneController, "serviceRestOne", serviceRestOne);
-        
+//        
         final MockHttpServletRequestBuilder get = get("/getjson")
                 .accept(MediaType.APPLICATION_JSON);
         final MvcResult restResult = this.mockMvc.perform(get)

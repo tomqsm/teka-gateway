@@ -1,8 +1,13 @@
 package biz.lesweb.rest.one.rest;
 import biz.lesweb.rest.one.RestOneApp;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,13 +36,14 @@ public class RestOneControllerIT {
 
     @Value("${local.server.port}")
     private int port;
-
+    @Value("${server.contextPath}")
+    private String serverContextPath;
     private URL base;
     private RestTemplate template;
 
     @Before
     public void setUp() throws Exception {
-        this.base = new URL("http://localhost:" + port + "/");
+        this.base = new URL("http://localhost:" + port + serverContextPath);
         template = new TestRestTemplate();
     }
 
@@ -46,6 +52,22 @@ public class RestOneControllerIT {
         LOG.info("started");
         ResponseEntity<String> response = template.getForEntity(base.toString(), String.class);
         assertThat(response.getBody(), equalTo("Greetings from Rest 1!"));
+    }
+    
+
+    @Test
+    public void controllerTestedWithRestTemplate() throws IOException{
+        final URL url = new URL(base +"/getjson");
+        ResponseEntity<String> response = template.getForEntity(url.toString(), String.class);
+        final String body = response.getBody();
+        final List<String> serverHeader = response.getHeaders().get("Server");
+        
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode root = mapper.readTree(body);
+        JsonNode name = root.path("message");
+        
+        assertThat(name.asText(), is("hello world"));
+        assertThat(serverHeader.get(0), is("Apache-Coyote/1.1"));
     }
 
 }
