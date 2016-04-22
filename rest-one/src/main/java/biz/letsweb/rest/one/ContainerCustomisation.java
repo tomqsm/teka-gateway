@@ -64,7 +64,7 @@ public class ContainerCustomisation {
         protocol.setSSLEnabled(true);
         protocol.setSslProtocol("TLS");
         protocol.setKeystoreFile(keystore.getAbsolutePath());
-        protocol.setKeystorePass("Drzewko74");
+        protocol.setKeystorePass("mypass");
         protocol.setKeystoreType("PKCS12");
         protocol.setClientAuth("false");
         return connector;
