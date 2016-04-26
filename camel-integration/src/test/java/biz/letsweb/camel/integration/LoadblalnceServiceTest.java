@@ -35,6 +35,7 @@ public class LoadblalnceServiceTest {
     protected ProducerTemplate jettyLoadBalancerProducerTemplate;
 
     @Test
+    @Ignore
     public void testEndpoint() throws InterruptedException {
         final String out = jettyLoadBalancerProducerTemplate.requestBody((Object) null, String.class);
         assertEquals("Greetings from Rest 1!", out);
