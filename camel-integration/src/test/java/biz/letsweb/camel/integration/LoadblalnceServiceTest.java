@@ -23,7 +23,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = IntegratorApp.class)
 @WebIntegrationTest(randomPort = true)
-public class IntegrationServiceTest {
+public class LoadblalnceServiceTest {
 
     @Autowired
     CamelContext camelContext;
