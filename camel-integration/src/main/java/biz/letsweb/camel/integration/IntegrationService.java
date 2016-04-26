@@ -20,7 +20,7 @@ public class IntegrationService extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         final Map<String, String> props = balancerProps.getLoadbalancer();
-        from(String.format("%s:%s?%s&%s", 
+        from(String.format("%s://%s?%s&%s", 
                 props.get("component"),
                 props.get("host"),
                 props.get("matchOnUriPrefix"),

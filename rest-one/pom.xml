@@ -62,6 +62,12 @@
             <artifactId>fest-assert</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.tuckey</groupId>
+            <artifactId>urlrewritefilter</artifactId>
+            <version>4.0.4</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <properties>
     </properties>
