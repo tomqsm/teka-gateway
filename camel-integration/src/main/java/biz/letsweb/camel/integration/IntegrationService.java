@@ -20,20 +20,6 @@ public class IntegrationService extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         final Map<String, String> props = balancerProps.getLoadbalancer();
-        System.out.println(String.format("XX yeah %s", props));
-//        from("file:data/inbox?noop=true")
-//                .choice().when(header("CamelFileName").endsWith(".xml"))
-//                .process(new Processor() {
-//                    @Override
-//                    public void process(Exchange exchange) throws Exception {
-//                        Message message = exchange.getIn();
-//                        String body = message.getBody(String.class);
-//                        body = body + " enriched " + message.getHeader("CamelFileName", String.class);
-//                        message.setBody(body, String.class);
-//                        exchange.setIn(message);
-//                    }
-//                }).convertBodyTo(String.class)
-//                .to("file:data/outbox");
         from(String.format("%s:%s?%s&%s", 
                 props.get("component"),
                 props.get("host"),
