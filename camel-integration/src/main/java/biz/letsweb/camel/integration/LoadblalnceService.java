@@ -3,6 +3,7 @@ package biz.letsweb.camel.integration;
 import java.net.ConnectException;
 import java.util.Map;
 import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,10 +14,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class LoadblalnceService extends RouteBuilder {
-
+    
     @Autowired
     LoadBalancerProps balancerProps;
-
+    
     @Override
     public void configure() throws Exception {
         final Map<String, String> props = balancerProps.getLoadbalancer();
@@ -45,5 +46,5 @@ public class LoadblalnceService extends RouteBuilder {
                 .roundRobin()
                 .to("{{app1}}");
     }
-
+    
 }

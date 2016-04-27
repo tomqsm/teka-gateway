@@ -1,7 +1,7 @@
 spring:
  main:
   sources: biz.letsweb.camel.integration.IntegratorApp
-  web_environment: true
+  web_environment: false
  datasource:
   name: testds
   url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE
@@ -19,6 +19,7 @@ jettyProxyEndpoint1: jetty:http://localhost:8083?matchOnUriPrefix=true&throwExce
 jettyProxyEndpoint2: jetty:http://localhost:8081?matchOnUriPrefix=true&throwExceptionOnFailure=false
 app1: http://localhost:8070/rest-one?throwExceptionOnFailure=true&bridgeEndpoint=true&urlRewrite=#urlRewriteFilter
 sqltest: sql:SELECT * FROM property?dataSource=#dataSource
+findAllProps: direct:findallprops
 camel:
     prod:
      loadbalancer:

@@ -14,7 +14,6 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
@@ -36,15 +35,16 @@ public class DataSourceServiceTest {
     @EndpointInject(uri = "mock:sql")
     protected MockEndpoint mockResult;
 
-    @EndpointInject(uri = "{{sqltest}}")
+    @EndpointInject(uri = "{{findAllProps}}")
     protected ProducerTemplate sqlTestProducerTemplate;
 
     @Test
     public void testEndpoint() throws InterruptedException {
         mockResult.expectedMessageCount(1);
-        sqlTestProducerTemplate.sendBody(null);
+        sqlTestProducerTemplate.sendBody("");
         mockResult.assertIsSatisfied();
-        final Map body =  (LinkedCaseInsensitiveMap) mockResult.getReceivedExchanges().get(0).getIn().getBody();
+        final List<LinkedCaseInsensitiveMap> listOfResults = (List<LinkedCaseInsensitiveMap>) mockResult.getReceivedExchanges().get(0).getIn().getBody();
+        final Map body =  (LinkedCaseInsensitiveMap) listOfResults.get(0);
         Assert.assertEquals("żąć", body.get("value"));
     }
 }

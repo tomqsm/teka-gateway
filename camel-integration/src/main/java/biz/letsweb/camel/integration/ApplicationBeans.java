@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  * @author tomasz
  */
 @Configuration
-public class TuckeyUrlrewriteFilter {
+public class ApplicationBeans {
 
     @Bean
     public HttpUrlRewrite urlRewriteFilter() {
@@ -18,6 +18,9 @@ public class TuckeyUrlrewriteFilter {
         return httpUrlRewrite;
     }
 
+    @Bean
+    String myBean() {
+        return "I'm Spring bean!";
+    }
 
 }
- 
