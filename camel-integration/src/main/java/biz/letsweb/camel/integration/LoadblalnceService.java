@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class LoadblalnceService extends RouteBuilder {
     
     @Autowired
-    LoadBalancerProps balancerProps;
+    LoadbalanceProps balancerProps;
     
     @Override
     public void configure() throws Exception {

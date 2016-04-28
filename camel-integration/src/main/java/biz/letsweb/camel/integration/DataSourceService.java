@@ -6,7 +6,6 @@ import org.apache.camel.Exchange;
 import org.apache.camel.api.management.ManagedResource;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedCaseInsensitiveMap;
 
@@ -18,8 +17,8 @@ import org.springframework.util.LinkedCaseInsensitiveMap;
 @ManagedResource
 public class DataSourceService extends RouteBuilder {
 
-    @Autowired
-    private DataSource dataSource;
+//    @Autowired
+//    private DataSource dataSource;
 
     @Override
     public void configure() throws Exception {

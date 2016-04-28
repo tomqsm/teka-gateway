@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 @EnableConfigurationProperties
 @ConfigurationProperties(prefix = "camel.prod")
-public class LoadBalancerProps {
+public class LoadbalanceProps {
     
     private final Map<String, String> loadbalancer = new HashMap<>();
 
