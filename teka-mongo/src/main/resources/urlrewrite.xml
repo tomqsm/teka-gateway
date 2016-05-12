@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+<urlrewrite use-context="false" decode-using="utf-8">
+
+    <rule enabled="true" match-type="regex">
+        <note>Route to viewing Swagger documentation.</note>
+        <from>^/docs$</from>
+        <to type="redirect" last="true">http://%{server-name}:%{port}%{context-path}/swagger/index.html?url=%{context-path}/v2/api-docs#!%{context-path}</to>
+    </rule>
+    
+    
+    <rule enabled="true" match-type="regex">
+        <note>API versioning.</note>
+        <from>^/api/v1/([a-z]+)$</from>
+        <to last="true">/$1</to>
+    </rule>
+    <rule enabled="true" match-type="regex">
+        <note>API versioning.</note>
+        <from>^/api/v1/([a-z]+)/([a-z]+)$</from>
+        <to last="true">/$1/$2</to>
+    </rule>
+
+</urlrewrite>

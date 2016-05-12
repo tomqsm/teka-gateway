@@ -1,0 +1,11 @@
+server:
+ port: 8070
+ contextPath: /content-repository
+info.name: content-repository
+spring.data.mongodb.uri: mongodb://mongodb-content-repository-development/contentdb
+spring.devtools.restart.exclude: META-INF/maven/**
+content:
+ repository:
+  controller:
+   hardware:
+    404message: Content not found.
