@@ -1,4 +1,4 @@
-package biz.letsweb.camel.integration;
+package biz.letsweb.teka.integration;
 
 import org.apache.camel.component.urlrewrite.HttpUrlRewrite;
 import org.springframework.context.annotation.Bean;

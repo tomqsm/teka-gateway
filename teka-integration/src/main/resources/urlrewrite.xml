@@ -13,7 +13,17 @@
     
     <rule enabled="true" match-type="regex">
         <from>^/index1.html$</from>
-        <to last="true">/index.html</to>
+        <to last="true">/swagger/index.html</to>
+    </rule>
+    
+    <rule enabled="true" match-type="regex">
+        <from>^/css/(.+)$</from>
+        <to last="true">/swagger/css/$1</to>
+    </rule>
+    
+    <rule enabled="true" match-type="regex">
+        <from>^/lib/([a-z]+)$</from>
+        <to last="true">/swagger/lib/$1</to>
     </rule>
 
 

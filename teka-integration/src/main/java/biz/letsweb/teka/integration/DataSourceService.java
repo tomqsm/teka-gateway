@@ -1,4 +1,4 @@
-package biz.letsweb.camel.integration;
+package biz.letsweb.teka.integration;
 
 import java.util.List;
 import javax.sql.DataSource;
@@ -17,8 +17,8 @@ import org.springframework.util.LinkedCaseInsensitiveMap;
 @ManagedResource
 public class DataSourceService extends RouteBuilder {
 
-//    @Autowired
-//    private DataSource dataSource;
+    @Autowired
+    private DataSource dataSource;
 
     @Override
     public void configure() throws Exception {

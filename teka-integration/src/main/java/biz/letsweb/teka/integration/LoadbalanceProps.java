@@ -1,4 +1,4 @@
-package biz.letsweb.camel.integration;
+package biz.letsweb.teka.integration;
 
 import java.util.HashMap;
 import java.util.Map;

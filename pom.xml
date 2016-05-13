@@ -8,8 +8,8 @@
     <name>teka-gateway</name>
     <description>Draft gateway for REST spring boot based web services.</description>
     <modules>
-        <module>camel-integration</module>
         <module>teka-mongo</module>
+        <module>teka-integration</module>
     </modules>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -21,7 +21,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>1.3.2.RELEASE</version>
+                <version>1.3.4.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

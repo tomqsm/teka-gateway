@@ -1,5 +1,6 @@
-package biz.letsweb.camel.integration;
+package biz.letsweb.teka.integration;
 
+import biz.letsweb.teka.integration.IntegratorApp;
 import java.util.concurrent.TimeUnit;
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;

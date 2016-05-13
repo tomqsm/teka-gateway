@@ -1,6 +1,7 @@
-package biz.letsweb.teka.mongo.rest.error;
+package biz.letsweb.teka.mongo.rest.controller;
 
-import static biz.letsweb.teka.mongo.rest.error.ErrorContentController.ERROR_PATH;
+import static biz.letsweb.teka.mongo.rest.controller.ErrorContentController.ERROR_PATH;
+import biz.letsweb.teka.mongo.rest.error.ErrorMessage;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -42,7 +43,8 @@ public class ErrorContentController implements ErrorController {
         final ErrorMessage errorMessage = new ErrorMessage();
         errorMessage.setName(status.name());
         errorMessage.setStatus(status.toString());
-        errorMessage.setMessage(String.format("%s %s", getValidationErrorMessage(body), getGenericErrorMessage(body)).trim());
+        final String errorText = String.format("%s %s", getValidationErrorMessage(body), getGenericErrorMessage(body)).trim();
+        errorMessage.setMessage(errorText);
         return new ResponseEntity<>(errorMessage, status);
     }
 

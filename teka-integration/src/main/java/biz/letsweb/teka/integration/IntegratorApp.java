@@ -1,4 +1,4 @@
-package biz.letsweb.camel.integration;
+package biz.letsweb.teka.integration;
 
 import org.apache.camel.spring.boot.FatJarRouter;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

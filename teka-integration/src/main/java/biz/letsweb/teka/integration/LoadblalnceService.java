@@ -1,4 +1,4 @@
-package biz.letsweb.camel.integration;
+package biz.letsweb.teka.integration;
 
 import java.net.ConnectException;
 import java.util.Map;
