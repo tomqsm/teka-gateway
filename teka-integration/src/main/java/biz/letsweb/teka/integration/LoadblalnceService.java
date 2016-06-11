@@ -3,7 +3,6 @@ package biz.letsweb.teka.integration;
 import java.net.ConnectException;
 import java.util.Map;
 import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

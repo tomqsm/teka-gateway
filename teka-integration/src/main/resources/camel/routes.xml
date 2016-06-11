@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <routes xmlns="http://camel.apache.org/schema/spring">
-     <route id="test">
-         <from uri="timer://trigger?fixedRate=true&amp;period=60000"/>
-         <transform>
-             <simple>ref:myBean</simple>
-         </transform>
-         <to uri="log:out"/>
-     </route>
- </routes>
+    <route id="test">
+        <from uri="timer://trigger?fixedRate=true&amp;period=4000"/>
+        <transform>
+            <simple>ref:giraffe</simple>
+        </transform>
+        <marshal ref="jacksonDataFormat"/>
+        <!--        <transform>
+            <simple>Hello ${bodyAs(String)} how are you?</simple>
+        </transform>-->
+        <to uri="direct:testQueue"/>
+        <log message="Me Got ${body} "  loggingLevel="WARN" logName="com.mycompany.MyCoolRoute"/>
+        <to uri="log:out"/>
+    </route>
+    <route id="test1">
+        <delay>
+            <constant>10000</constant>
+        </delay>
+        <from uri="rabbitmq://localhost:5672/task?queue=testQueue&amp;routingKey=general.queue&amp;exchangeType=direct&amp;username=guest&amp;password=guest&amp;autoDelete=false&amp;durable=true"/>
+        <unmarshal ref="jacksonDataFormat"/>
+        <to uri="log:out"/>
+    </route>
+</routes>
